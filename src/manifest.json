@@ -3,24 +3,22 @@
   "version": "0.1.0",
   "type": "APP",
   "name": {
-    "en": "KintoneMajorToMinorItem",
-    "ja": "大項目から小項目の絞り込み"
+    "en": "KintoneCalculateDate",
+    "ja": "日付計算の関連付け"
   },
   "description": {
-    "en": "KintoneMajorToMinorItem",
-    "ja": "大項目から小項目の絞り込み"
+    "en": "KintoneCalculateDate",
+    "ja": "日付計算の関連付け"
   },
   "icon": "image/icon.png",
   "homepage_url": {
-    "en": "https://github.com/noz-23/KintoneMajorToMinorItem",
-    "ja": "https://github.com/noz-23/KintoneMajorToMinorItem"
+    "en": "https://github.com/noz-23/KintoneCalculateDate",
+    "ja": "https://github.com/noz-23/KintoneCalculateDate"
   },
   "desktop": {
     "js": [
       "https://js.cybozu.com/jquery/3.7.1/jquery.min.js",
       "https://js.cybozu.com/jsrender/1.0.13/jsrender.min.js",
-      "https://js.cybozu.com/kintone-rest-api-client/3.2.1/KintoneRestAPIClient.min.js",
-      "https://unpkg.com/kintone-ui-component/umd/kuc.min.js",
       "js/desktop.js"
     ],
     "css": [
@@ -40,7 +38,8 @@
       "css/config.css"
     ],
     "required_params": [
-      "paramAppNumber"
+      "paramFieldCalculate",
+      "paramFieldDate"
     ]
   }
 }
