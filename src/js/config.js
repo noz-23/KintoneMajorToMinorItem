@@ -17,9 +17,10 @@ jQuery.noConflict();
   const self =this;
 
   // 設定パラメータ
-  const ParameterAppNumber ='paramAppNumber';    //  アプリ番号
-  const ParameterFieldSpace='paramFieldSpace';    // 計算フィールド
-  const ParameterFieldSet  ='paramFieldSet';        // 日付フィールド
+  const ParameterAppNumber ='paramAppNumber';    // アプリ番号
+  const ParameterFieldSpace='paramFieldSpace';   // スペースフィールド
+  const ParameterFieldSet  ='paramFieldSet';     // 文字列フィールド
+  const ParameterCountRow  ='paramCountRow';     // 行数フィールド
 
   // 環境設定
   const Parameter = {
@@ -132,6 +133,7 @@ jQuery.noConflict();
       }
     }
 
+    // スペースはフィールドでないため、レイアウトから名称を取得
     var listLayout =await kintone.api(kintone.api.url('/k/v1/app/form/layout.json', true), 'GET', {'app': kintone.app.getId()});
     for( var row of listLayout.layout){
       for(var field of row.fields){
@@ -151,9 +153,33 @@ jQuery.noConflict();
     if(nowConfig[ParameterAppNumber]){
       jQuery(Parameter.Elements.AppNumber).val(nowConfig[ParameterAppNumber]); 
     }
-    //if(nowConfig[ParameterFieldDate]){
-    //  jQuery(Parameter.Elements.SetField).val(nowConfig[]); 
-    //}
+
+    var count =(nowConfig[ParameterCountRow]) ?Number(nowConfig[ParameterCountRow]):(0);
+    if(nowConfig[ParameterFieldSpace]){
+      var listSpace =JSON.parse(nowConfig[ParameterFieldSpace]);
+    }
+    if(nowConfig[ParameterFieldSet]){
+      var listSet =JSON.parse(nowConfig[ParameterFieldSet]);
+    }
+
+    // 作ってから値入れ
+    var table =jQuery(Parameter.Html.TableBody);
+    for(var i=1; i<count;i++){
+      var cloneTr= jQuery(Parameter.Html.TableBody+' > tr').eq(0).clone(true);
+      table.append(cloneTr);
+    }
+    var listTr = jQuery(Parameter.Html.TableBody+' > tr');
+    for(var i=0; i<count;i++){
+      var row =listTr.eq(i);
+      if(listSpace[i])
+      {
+        jQuery(row).find(Parameter.Elements.SpaceField).val(listSpace[i]);
+      }
+      if(listSet[i])
+      {
+        jQuery(row).find(Parameter.Elements.SetField).val(listSet[i]);
+      }    
+    }
   };
 
   /*
@@ -165,24 +191,29 @@ jQuery.noConflict();
     // 各パラメータの保存
     var config ={};
     config[ParameterAppNumber]=jQuery(Parameter.Elements.AppNumber).val();
-    config[ParameterFieldSpace]=[];
-    config[ParameterFieldSet]=[];
-
+    
     var listTr = jQuery(Parameter.Html.TableBody+' > tr');
 
+    var listSpace =[];
+    var listSet =[];
+    var count =0;
     for(var row of listTr)
     {
       console.log("row:%o",row);
 
       var space=jQuery(row).find(Parameter.Elements.SpaceField);
       console.log("space:%o",space);
-      config[ParameterFieldSpace].push(space.val());
+      listSpace.push(space.val());
       
       var set=jQuery(row).find(Parameter.Elements.SetField);
       console.log("set:%o",set);
-      config[ParameterFieldSet].push(set.val());
+      listSet.push(set.val());
+      count ++;
     }
-    //config[ParameterFieldDate]=jQuery(Parameter.Elements.DateField).val();
+    config[ParameterCountRow] =''+count;
+    // 配列は一旦文字列化して保存
+    config[ParameterFieldSpace]=JSON.stringify(listSpace);
+    config[ParameterFieldSet]=JSON.stringify(listSet);
 
     console.log('config:%o',config);
 
@@ -190,31 +221,25 @@ jQuery.noConflict();
     kintone.plugin.app.setConfig(config);
   };
 
+
+  /*
+  行の追加
+   引数　：なし
+   戻り値：なし
+  */
   function AddRow(){
-    // ラムダのthisは全体になりボタンでなくなる
+    // ラムダ式のthisは全体になりボタンでなくなるためfunctionを利用
     console.log("AddRow this:%o",this);
-    ////console.log("AddRow self:%o",self);
-    //var listTr =jQuery(Parameter.Html.TableBody+' > tr');
-    //console.log("AddRow listTr:%o",listTr);
-    //var cloneTr =listTr.eq(0).clone(true);
-    //console.log("AddRow cloneTr:%o",cloneTr);
-    ////var endTr=tr.eq(-1);
-    ////console.log("AddRow endTr:%o",endTr);
-
-    ////var table =jQuery(Parameter.Html.TableBody);
-    ////table.append(cloneTr);
-
-    ////endTr.insertBefore(cloneTr);
-    ////.insertAfter(jQuery(this).parent().parent());
-
-    //cloneTr.insertAfter(jQuery(this).parent().parent());
     jQuery(Parameter.Html.TableBody+' > tr').eq(0).clone(true).insertAfter(jQuery(this).parent().parent());
-
   };
 
-  function RemoveRow(){
+  /*
+  行の削除
+   引数　：なし
+   戻り値：なし
+  */
+   function RemoveRow(){
     console.log("RemoveRow this:%o",this);
-    //console.log("RemoveRow self:%o",self);
     jQuery(this).parent("td").parent("tr").remove();
   };
 
