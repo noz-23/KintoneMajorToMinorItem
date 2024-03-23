@@ -1,0 +1,65 @@
+<section id="plugin_setting_form" class="settings">
+  <h2 id="plugin_titile" class="settings-heading">{{html:lang.plugin_titile}}</h2>
+  <p id="plugin_description" class="kintoneplugin-desc">{{html:lang.plugin_description}}</p>
+  <form class="js-submit-settings">
+    <label id="app_label" class="kintoneplugin-label">{{html:lang.app_label}}</label>
+    <div class="kintoneplugin-input-outer">
+      <input id="app_number" class="kintoneplugin-input-text" type="number" min="0" value="0">
+    </div>
+    <br>
+    <label id="show_label" class="kintoneplugin-label">{{html:lang.show_label}}</label>
+    <div class="kintoneplugin-select">
+      <select id="field_show" value ="Disabled">
+        <option value="Disabled">{{html:lang.value_disabled}}</option>
+        <option value="NoVisable">{{html:lang.value_no_visabled}}</option>
+        <option value="Visable">{{html:lang.value_visabled}}</option>
+      </select>
+    </div>
+    <br>
+    <p class="kintoneplugin-row">
+      <label id="plugin_label" class="kintoneplugin-label">{{html:lang.plugin_label}}</label>
+      <br>
+    </p>
+    <table class="kintoneplugin-table">
+      <thead>
+        <!--  column -->
+        <tr>
+          <th class="kintoneplugin-table-th">
+            <span class="title">{{html:lang.space_label}}</span>
+          </th>
+          <th class="kintoneplugin-table-th">
+            <span class="title">{{html:lang.set_label}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="table_body">
+        <!--  row -->
+        <tr class="cf-plugin-text-line">
+          <td>
+            <div class="kintoneplugin-select">
+              <select id="space_field">
+                <option value="">---</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="kintoneplugin-select">
+              <select id="set_field">
+                <option value="">---</option>
+              </select>
+            </div>
+          </td>
+          <td class="kintoneplugin-table-td-operation">
+            <button type="button" class="kintoneplugin-button-add-row-image add_row"></button>
+            <button type="button" class="kintoneplugin-button-remove-row-image remove_row"></button>
+          </td>          
+        </tr>
+      </tbody>        
+    </table>
+    <br>
+    <p class="kintoneplugin-row">
+        <button type="button" id="plugin_cancel" class="kintoneplugin-button-dialog-cancel">{{html:lang.plugin_cancel}}</button>
+        <button type="button" id="plugin_ok" class="kintoneplugin-button-dialog-ok">{{html:lang.plugin_ok}}</button>
+    </p>
+  </form>
+</section>
