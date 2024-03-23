@@ -10,6 +10,8 @@
 
 ### イメージ
 
+　![KintoneMajorToMinorItem](https://github.com/noz-23/KintoneMajorToMinorItem/assets/160399039/75b630e3-1701-42ea-8fe1-ee9224caec0d)
+
 
 ## 2.注意点
 
@@ -35,6 +37,8 @@ kintone UI Component : https://cybozu.dev/ja/kintone/sdk/library/kintone-ui-comp
 ## 6.バージョン履歴
 
  2024/03/20 0.1.0 初版 とりあえずバージョンの作成(GitHubの練習)
+
+ 2024/03/23 0.1.1 フィールド表示の不具合修正
 
 ## 7.連絡
 
