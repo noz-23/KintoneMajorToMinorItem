@@ -5,11 +5,21 @@
  *
  * Licensed under the MIT License
  * 
+ *  利用：
+ *   JQuery:
+ *     https://jquery.com/
+ *     https://js.cybozu.com/jquery/3.7.1/jquery.min.js
+ *   
+ *   jsrender:
+ *     https://www.jsviews.com/
+ *     https://js.cybozu.com/jsrender/1.0.13/jsrender.min.js
+ * 
  * History
  *  2024/03/20 0.1.0 初版とりあえずバージョン
  *  2024/03/23 0.1.1 フィールド表示の不具合修正
+ *  2024/03/24 0.2.0 プラグイン設定画面に Google AdSense 追加
+ *
  */
-
 
 jQuery.noConflict();
 
